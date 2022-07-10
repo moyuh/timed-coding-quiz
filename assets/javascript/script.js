@@ -22,12 +22,12 @@ const questions = {
 
 timer.textContent= "Time Left: " + score;
 countDown.appendChild(timer);
-quiz.setAttribute("style", "visibility:hidden;")
+quiz.setAttribute("style", "display:none;")
 // hide start button start button will start time
 start.addEventListener("click", function(){
     console.log("hello world");
     //clear page div .welcome cleared  -HTML DIV WELCOME and BUTTON ELEMENT 
-    welcome.setAttribute("style", "visibility:hidden;")
+    welcome.setAttribute("style", "display:none;")
     //countdown loop- cant go below 0
     let timerInterval = setInterval(function () {
     if (score > 0 ) { 
