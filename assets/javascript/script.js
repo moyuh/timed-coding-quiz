@@ -1,6 +1,6 @@
 //declare variables
 //score===time
-//starting time 75 
+//starting time 75 @ 5 for practice
 let score = 5;
 let start = document.querySelector(".start");
 let welcome = document.querySelector(".welcome");
@@ -10,15 +10,37 @@ let as = document.getElementById("as");
 let timer = document.createElement("p");
 let quiz = document.getElementById("quiz");
 let question = document.createElement("p");
+let list = document.querySelector(".list");
+var i= 0;
+
 // let ans1 = document.createElement("li");
 // let ans2 = document.createElement("li");
 // let ans3 = document.createElement("li");
 // let ans4 = document.createElement("li");
 //question:answer object
-const questions = {
-    Question1:"Commonly used daya types do not include:",
-    Answer1:["strings", "booleans","numbers", "alert"]
-}
+const questions = [
+    {
+        Question:"Commonly used daya types do not include:",
+    
+        Answer:["strings", "booleans","numbers", "alert"]
+    },
+    {
+        Question:"insert question",
+        Answer:["insert", "insert","insert", "insert"]
+},
+{
+    Question:"insert question",
+    Answer:["insert", "insert","insert", "insert"]
+},
+{
+    Question:"insert question",
+    Answer:["insert", "insert","insert", "insert"]
+},
+ {
+    Question:"insert question",
+    Answer:["insert", "insert","insert", "insert"]
+},
+]
 
 timer.textContent= "Time Left: " + score;
 countDown.appendChild(timer);
@@ -42,11 +64,25 @@ start.addEventListener("click", function(){
     quiz.setAttribute("style", "visibility:visible;");
     question.textContent= questions.Question1;
     qs.appendChild(question);
-    for (let index = 0; index < 4; index++) {
-    document.getElementById(index).textContent=questions.Answer1[index];
-     // need to add event listener to each answer choice
-     // if statements go here with booleans  
-    }
+    while (i<questions.length) {
+        qs.textContent=questions[i].Question;
+        for (let b = 0; b< questions[i].Answer.length; b++) { 
+            document.getElementById(i).textContent=questions[i].Answer[b]
+            console.log(questions[i].Answer[b])
+        }
+        console.log(questions[i].Question);
+    //     list.addEventListener("click", function()
+    //     )
+        i++
+     }
+    
+
+
+    // for (let index = 0; index < 4; index++) {
+    // document.getElementById(index).textContent=questions.Answer1[index];
+    //  // need to add event listener to each answer choice
+    //  // if statements go here with booleans  
+    // }
 
       // question
         //if user picks correctly show next question
@@ -67,7 +103,6 @@ start.addEventListener("click", function(){
     //go back button or Clear highscores
     // welcome.setAttribute("style", "visibility:visible;")
 //view highscores
-
 
 
 
