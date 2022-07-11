@@ -92,9 +92,6 @@ start.addEventListener("click", function(){
 });
     
     
-    // question
-        //if user picks correctly show next question
-        //if user picks incorrectly time decreases by 15sec
 
 //if all questions are answered else timer reaches 0 
 
