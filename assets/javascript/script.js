@@ -25,20 +25,20 @@ const questions = [
         Answer:["strings", "booleans","numbers", "alert"]
     },
     {
-        Question:"insert question",
-        Answer:["insert", "insert","insert", "insert"]
+        Question:"is coding cool",
+        Answer:["blah", "iasdf","terw", "icoding"]
 },
 {
-    Question:"insert question",
-    Answer:["insert", "insert","insert", "insert"]
+    Question:"A variable named inside a function is in which scope:",
+    Answer:["global", "local","main", "sub"]
 },
 {
-    Question:"insert question",
-    Answer:["insert", "insert","insert", "insert"]
+    Question:"interesting question",
+    Answer:["interesting answer", "wrong answer","bad answer", "funny answer"]
 },
  {
     Question:"insert question",
-    Answer:["insert", "insert","insert", "insert"]
+    Answer:["insert here", "insert there","insert everywhere", "insert lols;"]
 },
 ]
 
@@ -66,7 +66,7 @@ start.addEventListener("click", function(){
     qs.appendChild(question);
     while (i<questions.length) {
         qs.textContent=questions[i].Question;
-        for (let b = 0; b< questions[i].Answer.length; b++) { 
+        for (let b = 0; b < questions[i].Answer.length; b++) { 
             document.getElementById(i).textContent=questions[i].Answer[b]
             console.log(questions[i].Answer[b])
         }
