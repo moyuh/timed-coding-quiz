@@ -11,7 +11,7 @@ let timer = document.createElement("p");
 let quiz = document.getElementById("quiz");
 let question = document.createElement("p");
 let list = document.querySelector(".list");
-var i= 0;
+let i= 0;
 
 // let ans1 = document.createElement("li");
 // let ans2 = document.createElement("li");
@@ -21,25 +21,27 @@ var i= 0;
 const questions = [
     {
         Question:"Commonly used daya types do not include:",
-    
-        Answer:["strings", "booleans","numbers", "alert"]
+        Answer:["strings", "booleans","numbers", "alert"],
+        correctAnswer: "alert",
     },
+
     {
         Question:"is coding cool",
-        Answer:["blah", "iasdf","terw", "icoding"]
-},
-{
-    Question:"A variable named inside a function is in which scope:",
-    Answer:["global", "local","main", "sub"]
-},
-{
-    Question:"interesting question",
-    Answer:["interesting answer", "wrong answer","bad answer", "funny answer"]
-},
- {
-    Question:"insert question",
-    Answer:["insert here", "insert there","insert everywhere", "insert lols;"]
-},
+        Answer:["blah", "iasdf","terw", "icoding"],
+    },
+
+    {
+        Question:"A variable named inside a function is in which scope:",
+        Answer:["global", "local","main", "sub"],
+    },
+    {
+        Question:"interesting question",
+        Answer:["interesting answer", "wrong answer","bad answer", "funny answer"],
+    },
+    {
+        Question:"insert question",
+        Answer:["insert here", "insert there","insert everywhere", "insert lols"],
+    },
 ]
 
 timer.textContent= "Time Left: " + score;
@@ -62,14 +64,13 @@ start.addEventListener("click", function(){
 
     },1000)
     quiz.setAttribute("style", "visibility:visible;");
-    question.textContent= questions.Question1;
-    qs.appendChild(question);
+    // qs.appendChild(question);
     while (i<questions.length) {
         qs.textContent=questions[i].Question;
         for (let b = 0; b < questions[i].Answer.length; b++) { 
             document.getElementById(i).textContent=questions[i].Answer[b]
             console.log(questions[i].Answer[b])
-        }
+        };
         console.log(questions[i].Question);
     //     list.addEventListener("click", function()
     //     )
