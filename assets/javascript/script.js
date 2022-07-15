@@ -1,17 +1,18 @@
 //declare variables
 //score===time
 //starting time 75 @ 5 for practice
-let score = 5;
+let score = 20;
 let start = document.querySelector(".start");
 let welcome = document.querySelector(".welcome");
 let countDown = document.getElementById("timer");
-let qs = document.getElementById("qs");
-let as = document.getElementById("as");
+// let qs = document.getElementById("qs");
+// let as = document.getElementById("as");
 let timer = document.createElement("p");
 let quiz = document.getElementById("quiz");
 let question = document.createElement("p");
-let list = document.querySelector(".list");
+let testing = document.querySelector(".testing");
 let i= 0;
+
 
 // let ans1 = document.createElement("li");
 // let ans2 = document.createElement("li");
@@ -20,7 +21,7 @@ let i= 0;
 //question:answer object
 const questions = [
     {
-        Question:"Commonly used daya types do not include:",
+        Question:"Commonly used data types do not include:",
         Answer:["strings", "booleans","numbers", "alert"],
         correctAnswer: "alert",
     },
@@ -42,7 +43,8 @@ const questions = [
         Question:"insert question",
         Answer:["insert here", "insert there","insert everywhere", "insert lols"],
     },
-]
+];
+
 
 timer.textContent= "Time Left: " + score;
 countDown.appendChild(timer);
@@ -62,22 +64,48 @@ start.addEventListener("click", function(){
         clearInterval(timerInterval); //endGame() here
     }
 
-    },1000)
-    quiz.setAttribute("style", "visibility:visible;");
-    // qs.appendChild(question);
-    while (i<questions.length) {
-        qs.textContent=questions[i].Question;
-        for (let b = 0; b < questions[i].Answer.length; b++) { 
-            document.getElementById(i).textContent=questions[i].Answer[b]
-            console.log(questions[i].Answer[b])
-        };
-        console.log(questions[i].Question);
-    //     list.addEventListener("click", function()
-    //     )
-        i++
-     }
-    
+    },1000);
 
+
+    quiz.setAttribute("style", "visibility:visible;");
+
+    });
+
+let questionAnswer = function() { 
+    qs.textContent=questions[i].Question;
+        for (let b = 0; b < questions[i].Answer.length; b++) { 
+            let list = document.createElement("li");
+            list.textContent=questions[i].Answer[b];
+            testing.append(list);  
+        
+    //issues are arising here:
+    list.addEventListener("click", function(event){
+        let q1a = questions[i].Answer[3];
+        let absoluteAns =questions[0].correctAnswer[0];
+        q1a==absoluteAns;
+        if(event == absoluteAns){
+            console.log("aye");
+           } else {
+            console.log(":(");
+           }
+
+         })};
+    //     )
+    i++
+};
+    
+questionAnswer();
+
+// document.querySelector().addEventListener("click", function(userSelection) {
+//     if(userSelection == true){
+//      console.log("aye");
+//     } else {
+//      console.log(":(");
+//     }
+        
+//      } 
+        
+//     )
 
     // for (let index = 0; index < 4; index++) {
     // document.getElementById(index).textContent=questions.Answer1[index];
@@ -88,9 +116,7 @@ start.addEventListener("click", function(){
       // question
         //if user picks correctly show next question
         //if user picks incorrectly time decreases by 15sec
-    
-    
-});
+
     
     
 
