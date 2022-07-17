@@ -27,21 +27,25 @@ const questions = [
     },
 
     {
-        Question:"is coding cool",
-        Answer:["blah", "iasdf","terw", "icoding"],
+        Question:"If you will be using a variable throughout your code what scope should it be on?:",
+        Answer:["global", "mouthwash","terminal", "local"],
+        correctAnswer: "global",
     },
 
+    {   Question: "How to you make an HTML Element using JavaScript?:",
+        Answer:["you can't", "document.createElement()", "document.makeElement()", "document.textContent"],
+        correctAnswer: "document.createElement()",
+        
+    },
+    {
+        Question:"What does the following syntax do if this was already a defined function definedFunction()",
+        Answer:["it breaks the code", "resets the function","it calls the function", "it causes headaches"],
+        correctAnswer: "it calls the function",
+    },
     {
         Question:"A variable named inside a function is in which scope:",
         Answer:["global", "local","main", "sub"],
-    },
-    {
-        Question:"interesting question",
-        Answer:["interesting answer", "wrong answer","bad answer", "funny answer"],
-    },
-    {
-        Question:"insert question",
-        Answer:["insert here", "insert there","insert everywhere", "insert lols"],
+        correctAnswer: "local",
     },
 ];
 
@@ -72,6 +76,7 @@ start.addEventListener("click", function(){
     });
 
 let questionAnswer = function() { 
+    testing.textContent="";
     qs.textContent=questions[i].Question;
         for (let b = 0; b < questions[i].Answer.length; b++) { 
             let list = document.createElement("li");
@@ -80,13 +85,34 @@ let questionAnswer = function() {
         
     //issues are arising here:
     list.addEventListener("click", function(event){
-        let q1a = questions[i].Answer[3];
-        let absoluteAns =questions[0].correctAnswer[0];
+        let pick = event.target; 
+        let q1a = questions[0].Answer[3];
+        let q2a = questions[1].Answer[0];
+        let q3a = questions[2].Answer[1];
+        let q4a = questions[3].Answer[2];
+        let q5a = questions[4].Answer[1];
+
+        let absoluteAns = questions[0].correctAnswer;
+        let absoluteAns2 = questions[1].correctAnswer;
+        let absoluteAns3 = questions[2].correctAnswer;
+        let absoluteAns4 = questions[3].correctAnswer;
+        let absoluteAns5 = questions[4].correctAnswer;
+
         q1a==absoluteAns;
-        if(event == absoluteAns){
+        q2a==absoluteAns2;
+        q3a==absoluteAns3;
+        q4a==absoluteAns4;
+        q5a==absoluteAns5;
+
+
+        if(pick.textContent == absoluteAns || pick.textContent == absoluteAns2 || pick.textContent == absoluteAns3 || pick.textContent == absoluteAns4 || pick.textContent == absoluteAns5){
             console.log("aye");
+           questionAnswer();
            } else {
             console.log(":(");
+            alert("Wrong Answer:Decrease by 15 sec")
+            score = score - 15
+            questionAnswer();
            }
 
          })};
