@@ -5,20 +5,14 @@ let score = 20;
 let start = document.querySelector(".start");
 let welcome = document.querySelector(".welcome");
 let countDown = document.getElementById("timer");
-// let qs = document.getElementById("qs");
-// let as = document.getElementById("as");
 let timer = document.createElement("p");
 let quiz = document.getElementById("quiz");
 let question = document.createElement("p");
 let testing = document.querySelector(".testing");
+let highScoreForm = document.querySelector(".high-score-form");
 let i= 0;
 
-
-// let ans1 = document.createElement("li");
-// let ans2 = document.createElement("li");
-// let ans3 = document.createElement("li");
-// let ans4 = document.createElement("li");
-//question:answer object
+//question:answer:correctanswer object
 const questions = [
     {
         Question:"Commonly used data types do not include:",
@@ -52,10 +46,10 @@ const questions = [
 
 timer.textContent= "Time Left: " + score;
 countDown.appendChild(timer);
-quiz.setAttribute("style", "display:none;")
+quiz.setAttribute("style", "display:none;");
+highScoreForm.setAttribute("style","display:none;");
 // hide start button start button will start time
 start.addEventListener("click", function(){
-    console.log("hello world");
     //clear page div .welcome cleared  -HTML DIV WELCOME and BUTTON ELEMENT 
     welcome.setAttribute("style", "display:none;")
     //countdown loop- cant go below 0
@@ -64,8 +58,12 @@ start.addEventListener("click", function(){
     score--;
     timer.textContent= "Time Left: " + score;
     countDown.appendChild(timer);
+    endGame();
     } else {
-        clearInterval(timerInterval); //endGame() here
+        qs.textContent="";
+        as.textContent="";
+        endGame();
+         //endGame() here
     }
 
     },1000);
@@ -81,9 +79,10 @@ let questionAnswer = function() {
         for (let b = 0; b < questions[i].Answer.length; b++) { 
             let list = document.createElement("li");
             list.textContent=questions[i].Answer[b];
+            list.setAttribute("style", "background-color: maroon;", "border: black solid 5px;")
             testing.append(list);  
         
-    //issues are arising here:
+   // question and answer based on user input
     list.addEventListener("click", function(event){
         let pick = event.target; 
         let q1a = questions[0].Answer[3];
@@ -104,56 +103,67 @@ let questionAnswer = function() {
         q4a==absoluteAns4;
         q5a==absoluteAns5;
 
-
         if(pick.textContent == absoluteAns || pick.textContent == absoluteAns2 || pick.textContent == absoluteAns3 || pick.textContent == absoluteAns4 || pick.textContent == absoluteAns5){
-            console.log("aye");
+           //if user picks correctly show next question
            questionAnswer();
            } else {
-            console.log(":(");
-            alert("Wrong Answer:Decrease by 15 sec")
-            score = score - 15
+            //if user picks incorrectly time decreases by 2sec
+            alert("Wrong Answer: Score/Time will decrease by 2 sec");
+            score = score - 2;
             questionAnswer();
            }
 
          })};
-    //     )
     i++
 };
     
 questionAnswer();
 
-// document.querySelector().addEventListener("click", function(userSelection) {
-//     if(userSelection == true){
-//      console.log("aye");
-//     } else {
-//      console.log(":(");
-//     }
-        
-//      } 
-        
-//     )
-
-    // for (let index = 0; index < 4; index++) {
-    // document.getElementById(index).textContent=questions.Answer1[index];
-    //  // need to add event listener to each answer choice
-    //  // if statements go here with booleans  
-    // }
-
-      // question
-        //if user picks correctly show next question
-        //if user picks incorrectly time decreases by 15sec
+    
 
     
     
 
 //if all questions are answered else timer reaches 0 
+let endGame = function() {
+    if (i === questions.length || score === 0 ){
+    clearInterval(timerInterval);
+    highScoreForm.setAttribute("style", "display: block;", "margin-left: 35%;");
+    } else {
+        questionAnswer(); 
+    }
 
+}
 //end game
     //put in initials for leaderboard
     //go back button or Clear highscores
     // welcome.setAttribute("style", "visibility:visible;")
 //view highscores
 
+// function saveHighscore() {
+//     // get value of input box
+//     var initials = initialsEl.value.trim();
+  
+//     // make sure value wasn't empty
+//     if (initials !== "") {
+//       // get saved scores from localstorage, or if not any, set to empty array
+//       var highscores =
+//         JSON.parse(window.localStorage.getItem("highscores")) || [];
+  
+//       // format new score object for current user
+//       var newScore = {
+//         score: time,
+//         initials: initials
+//       };
+  
+//       // save to localstorage
+//       highscores.push(newScore);
+//       window.localStorage.setItem("highscores", JSON.stringify(highscores));
+  
+//       // redirect to next page
+//       window.location.href = "highScore.html";
+//     }
+//   }
 
 
 

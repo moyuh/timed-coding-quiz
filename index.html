@@ -13,9 +13,11 @@
 <body>
     <main class="welcome" id ="main">
         <h1>Timed Coding Quiz</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita doloremque voluptate architecto eum id aliquid, exercitationem facilis ipsa itaque obcaecati blanditiis vel est quod praesentium libero eaque, sequi distinctio pariatur!</p>
-        <button class="start">Start Here!😊</button>
-        <button class="high-score">High Score😊</button>
+        <br/>
+        <p id="info">Test your coding knowledge here with a short quiz! Any wrong answers will deduct your time/points! GLHF 😄</p>
+        <div class="start">Start Here!😊</div>
+        <br/>
+        <div class="high-score"><a href="./highscore.html" target ="_blank">High Score😊</a></div>
     </main>
     <section id="quiz">
         <aside id="qs"></aside>
@@ -26,7 +28,14 @@
         </aside>
     </section>
     <aside id="timer"></aside>
-    <!-- High score scection -->
+    <!-- High score input section-->
+    <section class="high-score-form">
+        <h3>Quiz Complete</h2>
+        <h4>Your Final Score is <span id="finScore">0</span></h3>
+        <label for="initials">Enter Initials:</label>
+        <input type="text" name="initials" id="initials">
+        <button id="submit-btn" type="submit">Submit High Score</button>
+    </section>
 
 <script src="./assets/javascript/script.js" ></script>
 </body>

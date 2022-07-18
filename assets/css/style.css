@@ -1,5 +1,5 @@
 :root {
-background-color: forestgreen;
+background-color: rgb(40, 42, 43);
 color: white;
 font-size: 24px;
 box-sizing: border-box;
@@ -8,35 +8,52 @@ padding: 0;
 font-family: 'Shadows Into Light', cursive;
 }
 
-.welcome{
-    display: flex;
-}
-
-h1{
+h1 {
     font-size: 35px;
     flex-wrap: nowrap;
     margin-left: 35%;
-    margin-bottom: 20px;
-    margin-left:20px;
-    margin-top: 20px;
-    width: 100%;
+    width: fit-content;
     height: fit-content;
-    flex-direction: row;
-    align-items: center;
     border: 10px solid white;
     padding: 10px;
     background-color:black;
     box-shadow: 10px 10px 10px 10px black;
     position:relative;
 }
-p{
+#info{
+    display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    width: 100%;
+    width: fit-content;
     position: relative;
-    margin:35px;
-
-
+    margin-left: 25%;
+    margin-right: 35%;
+    padding: 10px;
+    border: 10px solid maroon;
+    box-shadow: 10px 10px 10px 10px black;
 }
+.start {
+    background-color: black;
+    width: fit-content;
+    height: max-content;
+    padding:5px;
+    border:5px solid white;
+    margin-left: 40%;
+}
+.high-score{
+    background-color: black;
+    width: fit-content;
+    height: max-content;
+    padding:5px;
+    border:5px solid white;
+    margin-left: 40%;
+}
+li:hover{
+    opacity: 0.5;
+}
+.high-score ::after, :visited {
+    color:white;
+    text-decoration: underline;
+}
+
