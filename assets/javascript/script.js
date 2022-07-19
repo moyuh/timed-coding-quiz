@@ -13,9 +13,10 @@ let quiz = document.getElementById("quiz");
 let question = document.createElement("p");
 let testing = document.querySelector(".testing");
 let highScoreForm = document.getElementById("high-score-form");
-let input = document.getElementById("initials");
+let initialsInput = document.getElementById("initials");
 let submit = document.getElementById("submit");
 let i= 0;
+let scoreList = document.createElement("li");
 
 //question:answer:correctanswer object
 const questions = [
@@ -51,7 +52,7 @@ const questions = [
 
 timer.textContent= "Time Left: " + time;
 scoreSheet.textContent= "Your score: " + points;
-countDown.appendChild(timer);
+countDown.append(timer);
 quiz.append(scoreSheet);
 quiz.setAttribute("style", "display:none;");
 highScoreForm.setAttribute("style", "display:none;");
@@ -141,7 +142,7 @@ let endGame = function() {
     
 }
 
-submit.addEventListener("click", function() {
+submit.addEventListener("click", function(event) {
     window.location.href = "highscore.html";
     saveHighScore();
  }
@@ -150,39 +151,39 @@ submit.addEventListener("click", function() {
 //view highscores
 function saveHighScore() {
     // get value of input box
-    var initials = input.value.trim();
+    var initials = initialsInput.value.trim();
   
     // make sure user input a value
     if (initials !== " ") {
       // get saved scores from localstorage, or is empty for first timer
       var highscoredata =
-        JSON.parse(localStorage.getItem("highScore")) || [];
+        JSON.parse(localStorage.getItem("highscoredata")) || [];
       var currentScore = {
         score: points,
         initials: initials,
-      }
+      } 
       // save to localstorage
       highscoredata.push(currentScore);
       window.localStorage.setItem("highScore", JSON.stringify(highscoredata));
+
+      scoreList.textContent = "Score: "+ currentScore.points+ " initials: " + currentScore.initials
     } else { 
         alert("Please add initials!!");
     }
     // either get scores from localstorage or set to empty array
-    highscoredata.forEach(function(scoreList) {
+    
       // create li tag for each high score
-      var scoreList = document.createElement("li");
-      scoreList.textContent = "Score: "+ currentScore.points+ " initials: " + currentScore.initials;
+      
+      
       var highScoreList = document.getElementById("high-score-list");
       highScoreList.textContent= "High Scores:"
       highScoreList.appendChild(scoreList);
     
-      
-
-    });
   };
   
 hs.addEventListener("click", function(){
     window.location.href = "highscore.html";
+    saveHighScore();
 })
 
 
