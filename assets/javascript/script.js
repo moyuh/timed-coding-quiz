@@ -145,8 +145,7 @@ let endGame = function() {
 submit.addEventListener("click", function(event) {
     window.location.href = "highscore.html";
     saveHighScore();
- }
- ); 
+ }); 
 
 //view highscores
 function saveHighScore() {
