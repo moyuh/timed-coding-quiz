@@ -1,7 +1,7 @@
 //declare variables
 //score===time
-//starting time 75 @ 5 for practice
-let time = 15;
+//starting time 15 @ 2 for practice
+let time = 2;
 let points = 0;
 let start = document.querySelector(".start");
 let welcome = document.querySelector(".welcome");
@@ -13,10 +13,11 @@ let quiz = document.getElementById("quiz");
 let question = document.createElement("p");
 let testing = document.querySelector(".testing");
 let highScoreForm = document.getElementById("high-score-form");
-let initialsInput = document.getElementById("initials");
+let initialsInput = document.getElementById("initialsHS");
 let submit = document.getElementById("submit");
 let i= 0;
 let scoreList = document.createElement("li");
+let highscoredata = []; 
 
 //question:answer:correctanswer object
 const questions = [
@@ -52,23 +53,27 @@ const questions = [
 
 timer.textContent= "Time Left: " + time;
 scoreSheet.textContent= "Your score: " + points;
-countDown.append(timer);
-quiz.append(scoreSheet);
-quiz.setAttribute("style", "display:none;");
-highScoreForm.setAttribute("style", "display:none;");
+// countDown.append(timer);
+// quiz.append(timer);
+// quiz.setAttribute("style", "display:none;");
+// highScoreForm.setAttribute("style", "display:none;");
 
 // hide start button start button will start time
-start.addEventListener("click", function(){
-    //clear page div .welcome cleared  -HTML DIV WELCOME and BUTTON ELEMENT 
-    welcome.setAttribute("style", "display:none;")
-    quiz.setAttribute("style", "visibility:visible;");
-    questionAnswer();
+// start.addEventListener("click", function(event){
+//     clear page div .welcome cleared  -HTML DIV WELCOME and BUTTON ELEMENT 
+//     event.target;
+//     welcome.setAttribute("style", "display:none;")
+//     quiz.setAttribute("style", "display:block;");
+//     questionAnswer();
 
-    });
+//     });
 
     //countdown loop- cant go below 0
 let timerInterval = start.addEventListener("click", function() {
     clearInterval(timerInterval);
+    welcome.setAttribute("style", "display:none;")
+    quiz.setAttribute("style", "display:block;");
+    questionAnswer();
     setInterval(function () {
     if (time > 0 ) { 
     time--;
@@ -76,10 +81,9 @@ let timerInterval = start.addEventListener("click", function() {
     countDown.appendChild(timer);
     }else {
         //endGame() here
-        endGame();
-        
+        endGame(); 
     }
-    },1000); });
+    },1000) });
 
 //logic for questions 
 let questionAnswer = function() { 
@@ -139,51 +143,54 @@ let endGame = function() {
     qs.textContent=" ";
     as.textContent=" ";
     timer.textContent=" ";
+    saveHighScore();   
     
 }
 
-submit.addEventListener("click", function(event) {
-    window.location.href = "highscore.html";
-    saveHighScore();
- }); 
-
 //view highscores
-function saveHighScore() {
+let saveHighScore = function () {
     // get value of input box
-    var initials = initialsInput.value.trim();
+    let initials =   JSON.parse(window.localStorage.getItem(initialsInput));
+    window.localStorage.setItem("initialsInput", JSON.stringify(initialsInput));
+    let score =   JSON.parse(window.localStorage.getItem("points"));
+    window.localStorage.setItem("points", JSON.stringify(points));
+    // let initials = initialsInput;
+    // let finalPoints= localStorage.getItem(points);
+    console.log(initials);
   
     // make sure user input a value
-    if (initials !== " ") {
+    if (initials !== "") {
       // get saved scores from localstorage, or is empty for first timer
-      var highscoredata =
-        JSON.parse(localStorage.getItem("highscoredata")) || [];
+    //   var highscoredata =
+    //   JSON.parse(window.localStorage.getItem("highscoredata")) || [];
       var currentScore = {
-        score: points,
+        score: score,
         initials: initials,
-      } 
-      // save to localstorage
-      highscoredata.push(currentScore);
-      window.localStorage.setItem("highScore", JSON.stringify(highscoredata));
+      }; 
 
-      scoreList.textContent = "Score: "+ currentScore.points+ " initials: " + currentScore.initials
+      console.log("1");
+     
     } else { 
         alert("Please add initials!!");
     }
     // either get scores from localstorage or set to empty array
-    
       // create li tag for each high score
-      
-      
-      var highScoreList = document.getElementById("high-score-list");
-      highScoreList.textContent= "High Scores:"
-      highScoreList.appendChild(scoreList);
-    
+        // save to localstorage
+    let pushScores = function () {
+    highscoredata.push(currentScore);
+    window.localStorage.setItem("highscoredata", JSON.stringify(highscoredata));
+    console.log(currentScore);
+    scoreList.textContent = `"Score: " ${currentScore.score} " initials: " ${currentScore.initials}`;
+    var highScoreList = document.getElementById("high-score-list");
+   scoreList.appendChild(highScoreList);};
+
+    return pushScores();   
+
   };
-  
-hs.addEventListener("click", function(){
-    window.location.href = "highscore.html";
-    saveHighScore();
-})
+// submit.addEventListener("click", function() {
+//     saveHighScore();
+//  }); 
+console.log("hello World");
 
 
 
