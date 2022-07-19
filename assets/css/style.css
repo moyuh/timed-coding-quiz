@@ -33,7 +33,7 @@ h1 {
     border: 10px solid maroon;
     box-shadow: 10px 10px 10px 10px black;
 }
-.start {
+.start, .high-score {
     background-color: black;
     width: fit-content;
     height: max-content;
@@ -41,19 +41,34 @@ h1 {
     border:5px solid white;
     margin-left: 40%;
 }
-.high-score{
-    background-color: black;
-    width: fit-content;
-    height: max-content;
-    padding:5px;
-    border:5px solid white;
-    margin-left: 40%;
-}
-li:hover{
-    opacity: 0.5;
-}
+
 .high-score ::after, :visited {
     color:white;
     text-decoration: underline;
 }
+li {
+    background-color: maroon;
+    width: 250px;
+    text-align: center;
+    border: 5px solid black;
+    border-radius: 5%;
+}
 
+li:hover, button:hover {
+    opacity: 0.5;
+    border: 5px solid white;
+    border-radius:5px;
+}
+.start:hover, .high-score:hover{
+    opacity: 0.5;
+    font-size: 40px;
+}
+button{
+    background-color: black;
+    color: white;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 15px;
+    padding:5px;
+    border: 5px solid white;
+    border-radius: 5px;
+}

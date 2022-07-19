@@ -1,15 +1,20 @@
 //declare variables
 //score===time
 //starting time 75 @ 5 for practice
-let score = 20;
+let time = 15;
+let points = 0;
 let start = document.querySelector(".start");
 let welcome = document.querySelector(".welcome");
 let countDown = document.getElementById("timer");
+let hs = document.querySelector(".high-score");
 let timer = document.createElement("p");
+let scoreSheet= document.createElement("p");
 let quiz = document.getElementById("quiz");
 let question = document.createElement("p");
 let testing = document.querySelector(".testing");
-let highScoreForm = document.querySelector(".high-score-form");
+let highScoreForm = document.getElementById("high-score-form");
+let input = document.getElementById("initials");
+let submit = document.getElementById("submit");
 let i= 0;
 
 //question:answer:correctanswer object
@@ -44,42 +49,45 @@ const questions = [
 ];
 
 
-timer.textContent= "Time Left: " + score;
+timer.textContent= "Time Left: " + time;
+scoreSheet.textContent= "Your score: " + points;
 countDown.appendChild(timer);
+quiz.append(scoreSheet);
 quiz.setAttribute("style", "display:none;");
-highScoreForm.setAttribute("style","display:none;");
+highScoreForm.setAttribute("style", "display:none;");
+
 // hide start button start button will start time
 start.addEventListener("click", function(){
     //clear page div .welcome cleared  -HTML DIV WELCOME and BUTTON ELEMENT 
     welcome.setAttribute("style", "display:none;")
-    //countdown loop- cant go below 0
-    let timerInterval = setInterval(function () {
-    if (score > 0 ) { 
-    score--;
-    timer.textContent= "Time Left: " + score;
-    countDown.appendChild(timer);
-    endGame();
-    } else {
-        qs.textContent="";
-        as.textContent="";
-        endGame();
-         //endGame() here
-    }
-
-    },1000);
-
-
     quiz.setAttribute("style", "visibility:visible;");
+    questionAnswer();
 
     });
 
+    //countdown loop- cant go below 0
+let timerInterval = start.addEventListener("click", function() {
+    clearInterval(timerInterval);
+    setInterval(function () {
+    if (time > 0 ) { 
+    time--;
+    timer.textContent= "Time Left: " + time;
+    countDown.appendChild(timer);
+    }else {
+        //endGame() here
+        endGame();
+        
+    }
+    },1000); });
+
+//logic for questions 
 let questionAnswer = function() { 
-    testing.textContent="";
-    qs.textContent=questions[i].Question;
+    testing.textContent=" ";
+    if(i != questions.length) 
+    {qs.textContent=questions[i].Question;
         for (let b = 0; b < questions[i].Answer.length; b++) { 
             let list = document.createElement("li");
             list.textContent=questions[i].Answer[b];
-            list.setAttribute("style", "background-color: maroon;", "border: black solid 5px;")
             testing.append(list);  
         
    // question and answer based on user input
@@ -87,7 +95,7 @@ let questionAnswer = function() {
         let pick = event.target; 
         let q1a = questions[0].Answer[3];
         let q2a = questions[1].Answer[0];
-        let q3a = questions[2].Answer[1];
+        let q3a = questions[2].Answer[1]; 
         let q4a = questions[3].Answer[2];
         let q5a = questions[4].Answer[1];
 
@@ -104,68 +112,81 @@ let questionAnswer = function() {
         q5a==absoluteAns5;
 
         if(pick.textContent == absoluteAns || pick.textContent == absoluteAns2 || pick.textContent == absoluteAns3 || pick.textContent == absoluteAns4 || pick.textContent == absoluteAns5){
-           //if user picks correctly show next question
+           //if user picks correctly it will increase score and show next question
+           points = points + 2;
+           scoreSheet.textContent= "Your score: " + points;
            questionAnswer();
            } else {
             //if user picks incorrectly time decreases by 2sec
-            alert("Wrong Answer: Score/Time will decrease by 2 sec");
-            score = score - 2;
+            alert("Wrong Answer: Time will decrease by 2 seconds");
+            time = time - 2;
+            points;
+            scoreSheet.textContent= "Your score: " + points;
             questionAnswer();
            }
-
-         })};
-    i++
-};
     
-questionAnswer();
+        })}
+        i++} else{
+            endGame();  
+        }};
 
-    
-
-    
-    
-
-//if all questions are answered else timer reaches 0 
-let endGame = function() {
-    if (i === questions.length || score === 0 ){
-    clearInterval(timerInterval);
-    highScoreForm.setAttribute("style", "display: block;", "margin-left: 35%;");
-    } else {
-        questionAnswer(); 
-    }
-
-}
 //end game
+let endGame = function() {
+    clearInterval(timerInterval);
     //put in initials for leaderboard
-    //go back button or Clear highscores
-    // welcome.setAttribute("style", "visibility:visible;")
+    highScoreForm.setAttribute("style", "display:block;");
+    qs.textContent=" ";
+    as.textContent=" ";
+    timer.textContent=" ";
+    
+}
+
+submit.addEventListener("click", function() {
+    window.location.href = "highscore.html";
+    saveHighScore();
+ }
+ ); 
+
 //view highscores
-
-// function saveHighscore() {
-//     // get value of input box
-//     var initials = initialsEl.value.trim();
+function saveHighScore() {
+    // get value of input box
+    var initials = input.value.trim();
   
-//     // make sure value wasn't empty
-//     if (initials !== "") {
-//       // get saved scores from localstorage, or if not any, set to empty array
-//       var highscores =
-//         JSON.parse(window.localStorage.getItem("highscores")) || [];
+    // make sure user input a value
+    if (initials !== " ") {
+      // get saved scores from localstorage, or is empty for first timer
+      var highscoredata =
+        JSON.parse(localStorage.getItem("highScore")) || [];
+      var currentScore = {
+        score: points,
+        initials: initials,
+      }
+      // save to localstorage
+      highscoredata.push(currentScore);
+      window.localStorage.setItem("highScore", JSON.stringify(highscoredata));
+    } else { 
+        alert("Please add initials!!");
+    }
+    // either get scores from localstorage or set to empty array
+    highscoredata.forEach(function(scoreList) {
+      // create li tag for each high score
+      var scoreList = document.createElement("li");
+      scoreList.textContent = "Score: "+ currentScore.points+ " initials: " + currentScore.initials;
+      var highScoreList = document.getElementById("high-score-list");
+      highScoreList.textContent= "High Scores:"
+      highScoreList.appendChild(scoreList);
+    
+      
+
+    });
+  };
   
-//       // format new score object for current user
-//       var newScore = {
-//         score: time,
-//         initials: initials
-//       };
-  
-//       // save to localstorage
-//       highscores.push(newScore);
-//       window.localStorage.setItem("highscores", JSON.stringify(highscores));
-  
-//       // redirect to next page
-//       window.location.href = "highScore.html";
-//     }
-//   }
+hs.addEventListener("click", function(){
+    window.location.href = "highscore.html";
+})
 
 
 
 
-//logic for questions 
+
+
