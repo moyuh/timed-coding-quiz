@@ -44,7 +44,12 @@ h1 {
 .quiz{
     display:none;
 }
-.high-score ::after, :visited {
+.high-score :visited, ::after {
+    color:white;
+    text-decoration: underline;
+}
+
+.play-again :visited, ::after {
     color:white;
     text-decoration: underline;
 }
@@ -75,5 +80,14 @@ button{
     border-radius: 5px;
 }
 #high-score-form{
+    display:none;
+    margin-left: 35%;
+}
+
+.play-again{
+    font-size: 15px;
+}
+
+.secret{
     display:none;
 }

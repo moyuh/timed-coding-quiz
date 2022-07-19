@@ -17,7 +17,7 @@
         <p id="info">Test your coding knowledge here with a short quiz! Any wrong answers will deduct your time/points! GLHF 😄</p>
         <div class="start">Start Here!😊</div>
         <br/>
-        <div class="high-score"><a href="./highscore.html">High Score👑</a></div>
+        <div class="high-score">High Score👑</a></div>
     </main>
     <section id="quiz">
         <aside id="qs"></aside>
@@ -31,9 +31,14 @@
     <!-- High score input section-->
     <section id="high-score-form">
         <h3>Quiz Complete</h3>
-        <label for="initials">Enter Initials:</label>
+        <label for="initialsHS">Enter Initials:</label>
         <input type="text" name="initials" id="initialsHS">
-        <button id="submit-btn" type="submit"><a href ="./highscore.html">Submit High Score</a></button>
+        <button id="submit-btn" type="submit">Submit High Score</button>
+        <button class="play-again"><a href="index.html">Play Again</button></a>
+    </section>
+    <section id="hs-display">
+        <h1 class="secret"> HIGH SCORES:</h1>
+        <p id="display"></p>
     </section>
 
 <script src="./assets/javascript/script.js" ></script>
