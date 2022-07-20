@@ -1,5 +1,4 @@
 //declare variables
-//score===time
 //starting time 15 @ 2 for practice
 let time = 15;
 let points = 0;
@@ -53,19 +52,6 @@ const questions = [
 
 timer.textContent= "Time Left: " + time;
 scoreSheet.textContent= "Your score: " + points;
-// countDown.append(timer);
-
-// quiz.setAttribute("style", "display:none;");
-// highScoreForm.setAttribute("style", "display:none;");
-
-// hide start button start button will start time
-start.addEventListener("click", function(){
-    // clear page div .welcome cleared  -HTML DIV WELCOME and BUTTON ELEMENT 
-    welcome.setAttribute("style", "display:none;")
-    quiz.setAttribute("style", "display:block;");
-    questionAnswer();
-    });
-
     //countdown loop- cant go below 0
 let startTime = function () { 
     timerInterval = setInterval(function () {
@@ -79,9 +65,17 @@ let startTime = function () {
     };
     },1000); };
 
+// hide start button start button will start time
+start.addEventListener("click", function(){
+    // clear page div .welcome cleared  -HTML DIV WELCOME and BUTTON ELEMENT 
+    welcome.setAttribute("style", "display:none;")
+    quiz.setAttribute("style", "display:block;");
+    startTime();
+    questionAnswer();
+    });
+
 //logic for questions 
 let questionAnswer = function() { 
-    startTime();
     quiz.append(scoreSheet);
     quiz.append(timer);
     testing.textContent=" ";
@@ -160,6 +154,7 @@ let saveHighScore = function () {
       }; 
 
       console.log("1");
+    // either get scores from localstorage or set to empty array
       
     var localStorageScore = JSON.parse(window.localStorage.getItem("highscoredata")) || [];
     
@@ -173,36 +168,18 @@ let saveHighScore = function () {
     } else { 
         alert("Please add initials!!");
     }
-    // either get scores from localstorage or set to empty array
-      // create li tag for each high score
-        // save to localstorage
+   
     
   };
-// submit.addEventListener("click", function() {
-//     saveHighScore();
-//  }); 
-
 submit.addEventListener("click", function(){
     console.log("hi");
     scoreSheet.textContent = "";
+    window.location.href="scores.html"
     saveHighScore();
-    showMeTheData();
 });
 
-let showMeTheData = function() {
-    var localStorageScore = JSON.parse(window.localStorage.getItem("highscoredata"));
-   
-    var highScoreContent = document.getElementById("display");
-    console.log(localStorageScore)
-    if(localStorageScore != []) {
-    highScoreContent.textContent = "Score: " + localStorageScore;
-    window.localStorage.setItem("highscoredata", JSON.stringify(highscoredata));
-}else{
-}};
 
 hs.addEventListener("click", function(){ 
-    highScoreForm.setAttribute("style", "display:none;"); 
-    scoreSheet.textContent = "";
-    showMeTheData(); 
+    window.location.href="scores.html";
 });
 
