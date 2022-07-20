@@ -17,4 +17,4 @@ The quiz runs through multiple questions and you lose time if you get an answer 
 https://moyuh.github.io/timed-coding-quiz/
 
 ### Screenshot of Webpage
-<img src="/Users/monicayuh/Code/Challenges/week-4/timed-coding-quiz/assets/images/coding-quiz.png">
+<img src="assets/images/coding-quiz.png">
